@@ -1,4 +1,3 @@
-# qModMaster 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -17,4 +16,3 @@ QModMaster is a free Qt-based implementation of a ModBus master application. A g
 
 2.Software
 QModMaster is based on QModBus <http://sourceforge.net/projects/qmodbus/> and libmodbus 3.1.0-1 <http://www.libmodbus.org/>.Supports both Windows and Linux.
-https://sourceforge.net/u/elbar/profile/
