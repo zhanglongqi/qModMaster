@@ -17,6 +17,12 @@ namespace Ui {
     class MainWindow;
 }
 
+enum NumBase{
+    DEC=0x0,
+    HEX=0x1,
+};
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -61,6 +67,8 @@ private slots:
     void scan(bool value);
     void request();
     void refreshView();
+
+    void on_HexCombo_activated(int index);
 
 signals:
     void resetCounters();
