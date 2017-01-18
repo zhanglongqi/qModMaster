@@ -1,7 +1,8 @@
-#include <QtWidgets/QApplication>
+#include <QApplication>
 #include <stdio.h>
 #include <stdlib.h>
 #include <QDir>
+#include <QTranslator>
 
 #include "QsLog.h"
 #include "QsLogDest.h"
@@ -9,15 +10,19 @@
 #include "modbusadapter.h"
 #include "modbuscommsettings.h"
 
+QTranslator *Translator;
+
 int main(int argc, char *argv[])
 {
-
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    Translator = new QTranslator;
+    Translator->load(":/translations/" + QCoreApplication::applicationName() + "_" + QLocale::system().name());
+    app.installTranslator(Translator);
 
     //init the logging mechanism
     QsLogging::Logger& logger = QsLogging::Logger::instance();
     logger.setLoggingLevel(QsLogging::InfoLevel);
-    const QString sLogPath(QDir(a.applicationDirPath()).filePath("QModMaster.log"));
+    const QString sLogPath(QDir(app.applicationDirPath()).filePath("QModMaster.log"));
     QsLogging::DestinationPtr fileDestination(QsLogging::DestinationFactory::MakeFileDestination(sLogPath,true,65535,2));
     QsLogging::DestinationPtr debugDestination(QsLogging::DestinationFactory::MakeDebugOutputDestination());
     logger.addDestination(debugDestination);
@@ -29,12 +34,12 @@ int main(int argc, char *argv[])
     ModbusCommSettings settings("qModMaster.ini");
 
     //show main window
-    MainWindow mainWin(NULL, &modbus_adapt, &settings);
+    mainWin = new MainWindow(NULL, &modbus_adapt, &settings);
     //connect signals - slots
-    QObject::connect(&modbus_adapt, SIGNAL(refreshView()), &mainWin, SLOT(refreshView()));
-    QObject::connect(&mainWin, SIGNAL(resetCounters()), &modbus_adapt, SLOT(resetCounters()));
-    mainWin.show();
+    QObject::connect(&modbus_adapt, SIGNAL(refreshView()), mainWin, SLOT(refreshView()));
+    QObject::connect(mainWin, SIGNAL(resetCounters()), &modbus_adapt, SLOT(resetCounters()));
+    mainWin->show();
 
-    return a.exec();
+    return app.exec();
 
 }

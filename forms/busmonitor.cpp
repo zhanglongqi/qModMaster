@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QCloseEvent>
+#include <QShowEvent>
 #include "busmonitor.h"
 #include "ui_busmonitor.h"
 #include "./src/rawdatadelegate.h"
@@ -14,17 +15,15 @@ BusMonitor::BusMonitor(QWidget *parent, RawDataModel *rawDataModel) :
 {
     ui->setupUi(this);
     ui->lstRawData->setModel(m_rawDataModel->model);
-    //TODO Delegate
+    //TODO : Delegate
     //ui->lstRawData->setItemDelegate(new RawDataDelegate());
     //Setup Toolbar
-    ui->toolBar->addAction(ui->actionStart_Stop);
     ui->toolBar->addAction(ui->actionSave);
     ui->toolBar->addAction(ui->actionClear);
     ui->toolBar->addAction(ui->actionExit);
     connect(ui->actionSave,SIGNAL(triggered()),this,SLOT(save()));
     connect(ui->actionClear,SIGNAL(triggered()),this,SLOT(clear()));
     connect(ui->actionExit,SIGNAL(triggered()),this,SLOT(exit()));
-    connect(ui->actionStart_Stop,SIGNAL(toggled(bool)),this,SLOT(startStop(bool)));
     connect(ui->lstRawData,SIGNAL(activated(QModelIndex)),this,SLOT(selectedRow(QModelIndex)));
     connect(ui->lstRawData,SIGNAL(clicked(QModelIndex)),this,SLOT(selectedRow(QModelIndex)));
 
@@ -78,25 +77,26 @@ void BusMonitor::clear()
 void BusMonitor::exit()
 {
 
-    qDebug()<<  "BusMonitor : exit" ;
+   qDebug()<<  "BusMonitor : exit" ;
 
-    ui->actionStart_Stop->setChecked(false);
-    this->close();
+   this->close();
 
 }
 
 void BusMonitor::closeEvent(QCloseEvent *event)
 {
 
-    ui->actionStart_Stop->setChecked(false);
+    m_rawDataModel->enableAddLines(false);
+    clear();
     event->accept();
 
 }
 
-void BusMonitor::startStop(bool en)
+void BusMonitor::showEvent(QShowEvent *event)
 {
 
-    m_rawDataModel->enableAddLines(en);
+    m_rawDataModel->enableAddLines(true);
+    event->accept();
 
 }
 
@@ -130,7 +130,7 @@ void BusMonitor::parseTxMsg(QString msg)
             }
             for (int i = 4; i < row.length() - 1 ; i++)
                 pdu.append(row[i]);
-            parseTxPDU(pdu);
+            parseTxPDU(pdu, "Slave Addr : ");
             ui->txtPDU->appendPlainText("CRC : " + pdu[pdu.length() - 2] + pdu[pdu.length() - 1]);
         }
         else if (msg.indexOf("TCP") > -1){//TCP message
@@ -144,21 +144,21 @@ void BusMonitor::parseTxMsg(QString msg)
             QStringList pdu;
             for (int i = 10; i < row.length() - 1 ; i++)
                 pdu.append(row[i]);
-            parseTxPDU(pdu);
+            parseTxPDU(pdu, "Unit ID : ");
         }
         else
-            ui->txtPDU->appendPlainText("Unknown Message");
+            ui->txtPDU->appendPlainText("Error! Cannot parse Message");
 
 }
 
-void BusMonitor::parseTxPDU(QStringList pdu)
+void BusMonitor::parseTxPDU(QStringList pdu, QString slave)
 {
 
     if (pdu.length() < 6){//check message length
         ui->txtPDU->appendPlainText("Error! Cannot parse Message");
         return;
     }
-    ui->txtPDU->appendPlainText("SlaveID : " + pdu[0]);
+    ui->txtPDU->appendPlainText(slave + pdu[0]);
     ui->txtPDU->appendPlainText("Function Code : " + pdu[1]);
     ui->txtPDU->appendPlainText("Starting Address : " + pdu[2] + pdu[3]);
     bool ok;
@@ -198,7 +198,7 @@ void BusMonitor::parseRxMsg(QString msg)
         }
         for (int i = 4; i < row.length() - 1 ; i++)
             pdu.append(row[i]);
-        parseRxPDU(pdu);
+        parseRxPDU(pdu, "Slave Addr : ");
         ui->txtPDU->appendPlainText("CRC : " + pdu[pdu.length() - 2] + pdu[pdu.length() - 1]);
     }
     else if (msg.indexOf("TCP") > -1){//TCP message
@@ -212,14 +212,14 @@ void BusMonitor::parseRxMsg(QString msg)
         QStringList pdu;
         for (int i = 10; i < row.length() - 1 ; i++)
             pdu.append(row[i]);
-        parseRxPDU(pdu);
+        parseRxPDU(pdu, "Unit ID : ");
     }
     else
-        ui->txtPDU->appendPlainText("Unknown Message");
+        ui->txtPDU->appendPlainText("Error! Cannot parse Message");
 
 }
 
-void BusMonitor::parseRxPDU(QStringList pdu)
+void BusMonitor::parseRxPDU(QStringList pdu, QString slave)
 {
 
     bool ok;
@@ -229,7 +229,7 @@ void BusMonitor::parseRxPDU(QStringList pdu)
             ui->txtPDU->appendPlainText("Error! Cannot parse Message");
             return;
         }
-        ui->txtPDU->appendPlainText("SlaveID : " + pdu[0]);
+        ui->txtPDU->appendPlainText(slave + pdu[0]);
         ui->txtPDU->appendPlainText("Function Code : " + pdu[1]);
         ui->txtPDU->appendPlainText("Byte Count : " + pdu[2]);
         int byteCount = pdu[2].toInt(&ok,16);
@@ -243,7 +243,7 @@ void BusMonitor::parseRxPDU(QStringList pdu)
             ui->txtPDU->appendPlainText("Error! Cannot parse Message");
             return;
         }
-        ui->txtPDU->appendPlainText("SlaveID : " + pdu[0]);
+        ui->txtPDU->appendPlainText(slave + pdu[0]);
         ui->txtPDU->appendPlainText("Function Code : " + pdu[1]);
         ui->txtPDU->appendPlainText("Starting Address : " + pdu[2] + pdu[3]);
         ui->txtPDU->appendPlainText("Output Value : " + pdu[4] + pdu[5]);
@@ -253,7 +253,7 @@ void BusMonitor::parseRxPDU(QStringList pdu)
             ui->txtPDU->appendPlainText("Error! Cannot parse Message");
             return;
         }
-        ui->txtPDU->appendPlainText("SlaveID : " + pdu[0]);
+        ui->txtPDU->appendPlainText(slave + pdu[0]);
         ui->txtPDU->appendPlainText("Function Code : " + pdu[1]);
         ui->txtPDU->appendPlainText("Starting Address : " + pdu[2] + pdu[3]);
         ui->txtPDU->appendPlainText("Quantity of Registers : " + pdu[4] + pdu[5]);
@@ -263,7 +263,7 @@ void BusMonitor::parseRxPDU(QStringList pdu)
             ui->txtPDU->appendPlainText("Error! Cannot parse Message");
             return;
         }
-        ui->txtPDU->appendPlainText("SlaveID : " + pdu[0]);
+        ui->txtPDU->appendPlainText(slave + pdu[0]);
         ui->txtPDU->appendPlainText("Function Code [80 + SlaveID] : " + pdu[1]);
         ui->txtPDU->appendPlainText("Exception Code : " + pdu[2]);
     }

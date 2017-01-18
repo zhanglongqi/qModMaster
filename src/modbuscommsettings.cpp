@@ -13,30 +13,37 @@ void  ModbusCommSettings::loadSettings()
         m_TCPPort = "502";
     else
         m_TCPPort = this->value("TCPPort").toString();
+
     if (this->value("SlaveIP").isNull())
         m_slaveIP = "127.000.000.001";
     else
         m_slaveIP = this->value("SlaveIP").toString();
+
     if (this->value("SerialPort").isNull())
         m_serialPort = "COM1";
     else
         m_serialPort = this->value("SerialPort").toString();
+
     if (this->value("Baud").isNull())
         m_baud = "9600";
     else
         m_baud = this->value("Baud").toString();
+
     if (this->value("DataBits").isNull())
         m_dataBits = "8";
     else
         m_dataBits = this->value("DataBits").toString();
+
     if (this->value("StopBits").isNull())
         m_stopBits = "1";
     else
         m_stopBits = this->value("StopBits").toString();
+
     if (this->value("Parity").isNull())
         m_parity = "None";
     else
         m_parity = this->value("Parity").toString();
+
     if (this->value("RTS").isNull())
         #ifdef Q_OS_WIN32
             m_RTS = "Disable";
@@ -45,11 +52,18 @@ void  ModbusCommSettings::loadSettings()
         #endif
     else
         m_RTS = this->value("RTS").toString();
+
     if (this->value("MaxNoOfLines").toInt() == 0 ||
             this->value("MaxNoOfLines").isNull())
         m_maxNoOfLines = "50";
     else
         m_maxNoOfLines = this->value("MaxNoOfLines").toString();
+
+    if (this->value("BaseAddr").isNull())
+        m_baseAddr = "0";
+    else
+        m_baseAddr = this->value("BaseAddr").toString();
+
     if (this->value("TimeOut").isNull())
         m_timeOut = "0";
     else
@@ -69,6 +83,7 @@ void  ModbusCommSettings::saveSettings()
     this->setValue("Parity",m_parity);
     this->setValue("RTS",m_RTS);
     this->setValue("MaxNoOfLines",m_maxNoOfLines);
+    this->setValue("BaseAddr",m_baseAddr);
     this->setValue("TimeOut",m_timeOut);
 
 }
@@ -163,6 +178,15 @@ void ModbusCommSettings::setMaxNoOfLines(QString maxNoOfLines)
     m_maxNoOfLines = maxNoOfLines;
 }
 
+QString  ModbusCommSettings::baseAddr()
+{
+    return m_baseAddr;
+}
+
+void ModbusCommSettings::setBaseAddr(QString baseAddr)
+{
+    m_baseAddr = baseAddr;
+}
 QString  ModbusCommSettings::timeOut()
 {
     return m_timeOut;

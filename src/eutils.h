@@ -4,7 +4,7 @@
 #include <QString>
 #include <QMap>
 #include <QTime>
-#include "modbus-private.h"
+#include "modbus.h"
 
 static const QString ModbusFunctionNames[]={"Read Coils (0x01)","Read Discrete Inputs (0x02)","Read Holding Registers (0x03)",
                                "Read Input Registers (0x04)","Write Single Coil (0x05)","Write Single Register (0x06)",
@@ -23,17 +23,17 @@ public:
     {
             switch(fCode)
             {
-                    case _FC_READ_COILS:
-                    case _FC_WRITE_SINGLE_COIL:
-                    case _FC_WRITE_MULTIPLE_COILS:
+                    case MODBUS_FC_READ_COILS:
+                    case MODBUS_FC_WRITE_SINGLE_COIL:
+                    case MODBUS_FC_WRITE_MULTIPLE_COILS:
                             return "Coil (binary)";
-                    case _FC_READ_DISCRETE_INPUTS:
+                    case MODBUS_FC_READ_DISCRETE_INPUTS:
                             return "Discrete Input (binary)";
-                    case _FC_READ_HOLDING_REGISTERS:
-                    case _FC_WRITE_SINGLE_REGISTER:
-                    case _FC_WRITE_MULTIPLE_REGISTERS:
+                    case MODBUS_FC_READ_HOLDING_REGISTERS:
+                    case MODBUS_FC_WRITE_SINGLE_REGISTER:
+                    case MODBUS_FC_WRITE_MULTIPLE_REGISTERS:
                             return "Holding Register (16 bit)";
-                    case _FC_READ_INPUT_REGISTERS:
+                    case MODBUS_FC_READ_INPUT_REGISTERS:
                             return "Input Register (16 bit)";
                     default:
                             break;
@@ -45,16 +45,16 @@ public:
     {
             switch(fCode)
             {
-                    case _FC_READ_COILS:
-                    case _FC_READ_DISCRETE_INPUTS:
-                    case _FC_READ_HOLDING_REGISTERS:
-                    case _FC_READ_INPUT_REGISTERS:
+                    case MODBUS_FC_READ_COILS:
+                    case MODBUS_FC_READ_DISCRETE_INPUTS:
+                    case MODBUS_FC_READ_HOLDING_REGISTERS:
+                    case MODBUS_FC_READ_INPUT_REGISTERS:
                         return false;
 
-                    case _FC_WRITE_SINGLE_COIL:
-                    case _FC_WRITE_MULTIPLE_COILS:
-                    case _FC_WRITE_SINGLE_REGISTER:
-                    case _FC_WRITE_MULTIPLE_REGISTERS:
+                    case MODBUS_FC_WRITE_SINGLE_COIL:
+                    case MODBUS_FC_WRITE_MULTIPLE_COILS:
+                    case MODBUS_FC_WRITE_SINGLE_REGISTER:
+                    case MODBUS_FC_WRITE_MULTIPLE_REGISTERS:
                          return true;
 
                     default:
@@ -67,16 +67,16 @@ public:
     {
             switch(fCode)
             {
-                    case _FC_READ_COILS:
-                    case _FC_READ_DISCRETE_INPUTS:
-                    case _FC_READ_HOLDING_REGISTERS:
-                    case _FC_READ_INPUT_REGISTERS:
-                    case _FC_WRITE_SINGLE_REGISTER:
-                    case _FC_WRITE_MULTIPLE_REGISTERS:
+                    case MODBUS_FC_READ_COILS:
+                    case MODBUS_FC_READ_DISCRETE_INPUTS:
+                    case MODBUS_FC_READ_HOLDING_REGISTERS:
+                    case MODBUS_FC_READ_INPUT_REGISTERS:
+                    case MODBUS_FC_WRITE_SINGLE_REGISTER:
+                    case MODBUS_FC_WRITE_MULTIPLE_REGISTERS:
                         return false;
 
-                    case _FC_WRITE_SINGLE_COIL:
-                    case _FC_WRITE_MULTIPLE_COILS:
+                    case MODBUS_FC_WRITE_SINGLE_COIL:
+                    case MODBUS_FC_WRITE_MULTIPLE_COILS:
                          return true;
 
                     default:
@@ -89,16 +89,16 @@ public:
     {
             switch(fCode)
             {
-                    case _FC_READ_COILS:
-                    case _FC_READ_DISCRETE_INPUTS:
-                    case _FC_READ_HOLDING_REGISTERS:
-                    case _FC_READ_INPUT_REGISTERS:
-                    case _FC_WRITE_SINGLE_COIL:
-                    case _FC_WRITE_MULTIPLE_COILS:
+                    case MODBUS_FC_READ_COILS:
+                    case MODBUS_FC_READ_DISCRETE_INPUTS:
+                    case MODBUS_FC_READ_HOLDING_REGISTERS:
+                    case MODBUS_FC_READ_INPUT_REGISTERS:
+                    case MODBUS_FC_WRITE_SINGLE_COIL:
+                    case MODBUS_FC_WRITE_MULTIPLE_COILS:
                         return false;
 
-                    case _FC_WRITE_SINGLE_REGISTER:
-                    case _FC_WRITE_MULTIPLE_REGISTERS:
+                    case MODBUS_FC_WRITE_SINGLE_REGISTER:
+                    case MODBUS_FC_WRITE_MULTIPLE_REGISTERS:
                          return true;
 
                     default:

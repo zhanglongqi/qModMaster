@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>close8-black.png</file>
+        <file>close8-red.png</file>
+        <file>options-16.png</file>
+        <file>edit-16.png</file>
+        <file>save-16.png</file>
+        <file>ethernet-port-16.png</file>
+        <file>serial-pot-16.png</file>
+        <file>edit-clear-16.png</file>
+        <file>reset-16.png</file>
+        <file>plug-connect-16.png</file>
+        <file>plug-disconnect-16.png</file>
+        <file>data-sort-16.png</file>
+        <file>China-flag-16.png</file>
+        <file>Taiwan-flag-16.png</file>
+        <file>usa-flag-16.png</file>
+        <file>cyclic-process-16.png</file>
+        <file>exit-16.png</file>
+        <file>text-x-log-16.png</file>
+        <file>info-sign-16.png</file>
+        <file>Close-16.png</file>
+        <file>connect-24.png</file>
+        <file>TV-16.png</file>
+        <file>bullet-green-16.png</file>
+        <file>bullet-red-16.png</file>
+        <file>help-desk-icon-16.png</file>
+    </qresource>
+</RCC>

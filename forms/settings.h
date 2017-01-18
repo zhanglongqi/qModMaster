@@ -1,7 +1,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QSettings>
 
 #include "src/modbuscommsettings.h"
