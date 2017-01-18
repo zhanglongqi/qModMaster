@@ -86,10 +86,6 @@ MainWindow::MainWindow(QWidget *parent, ModbusAdapter *adapter, ModbusCommSettin
     ui->actionScan->setEnabled(false);
     updateStatusBar();
 
-    // Init system with Hex
-    this->ui->HexCombo->setCurrentIndex (HEX);
-    this->on_HexCombo_activated(HEX);
-
     QLOG_INFO()<<  "Start Program" ;
 
 }
@@ -504,18 +500,3 @@ void MainWindow::modbusConnect(bool connect)
      m_statusErrors->setText(ERRORS + QString("%1").arg(m_modbus->errors()));
 
  }
-
-void MainWindow::on_HexCombo_activated(int index) {
-    switch (index) {
-    case DEC://DEC
-        this->ui->sbStartAddress->setDisplayIntegerBase (10);
-        this->ui->sbStartAddress->setPrefix ("0d-");
-        break;
-    case HEX:// Hex
-        this->ui->sbStartAddress->setDisplayIntegerBase (16);
-        this->ui->sbStartAddress->setPrefix ("0x-");
-        break;
-    default:
-        break;
-    }
-}

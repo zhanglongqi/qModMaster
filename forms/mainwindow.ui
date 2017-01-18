@@ -51,7 +51,7 @@
          <x>10</x>
          <y>0</y>
          <width>689</width>
-         <height>29</height>
+         <height>26</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayoutSettings">
@@ -165,52 +165,13 @@
          <x>10</x>
          <y>0</y>
          <width>689</width>
-         <height>68</height>
+         <height>60</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayoutCmds">
         <property name="topMargin">
          <number>5</number>
         </property>
-        <item row="2" column="6">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="5">
-         <widget class="QPushButton" name="btClear">
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Clear Items</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../data/qModMaster.qrc">
-            <normaloff>:/img/remove-16.png</normaloff>:/img/remove-16.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
          <widget class="QLabel" name="lblFunctionCode">
           <property name="text">
@@ -227,6 +188,38 @@
         <item row="2" column="2">
          <widget class="QComboBox" name="cmbFunctionCode"/>
         </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="lblFormat">
+          <property name="text">
+           <string>Format</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QComboBox" name="cmbBase">
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>Binary</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Decimal</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hex</string>
+           </property>
+          </item>
+         </widget>
+        </item>
         <item row="3" column="1">
          <widget class="QLabel" name="lblStartAddress">
           <property name="text">
@@ -237,6 +230,36 @@
           </property>
           <property name="buddy">
            <cstring>sbStartAddress</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QSpinBox" name="sbStartAddress">
+          <property name="maximum">
+           <number>65535</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="lblNoOfCoils">
+          <property name="text">
+           <string>Number of Coils</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="buddy">
+           <cstring>sbNoOfCoils</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QSpinBox" name="sbNoOfCoils">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>65535</number>
           </property>
          </widget>
         </item>
@@ -272,100 +295,44 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="3">
-         <widget class="QLabel" name="lblNoOfCoils">
+        <item row="3" column="5">
+         <widget class="QPushButton" name="btClear">
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Clear Items</string>
+          </property>
           <property name="text">
-           <string>Number of Coils</string>
+           <string/>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <property name="icon">
+           <iconset resource="../data/qModMaster.qrc">
+            <normaloff>:/img/remove-16.png</normaloff>:/img/remove-16.png</iconset>
           </property>
-          <property name="buddy">
-           <cstring>sbNoOfCoils</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="QSpinBox" name="sbNoOfCoils">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>65535</number>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
           </property>
          </widget>
         </item>
-        <item row="2" column="4">
-         <widget class="QComboBox" name="cmbBase">
-          <property name="currentIndex">
-           <number>1</number>
+        <item row="2" column="6">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <item>
-           <property name="text">
-            <string>Binary</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Decimal</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Hex</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLabel" name="lblFormat">
-          <property name="text">
-           <string>Format</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QSpinBox" name="sbStartAddress">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximum">
-             <number>65535</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="HexCombo">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <item>
-             <property name="text">
-              <string>Dec</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hex</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -394,8 +361,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>560</width>
-     <height>19</height>
+     <width>500</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
