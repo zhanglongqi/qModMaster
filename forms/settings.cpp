@@ -25,6 +25,7 @@ void Settings::showEvent(QShowEvent * event)
     if (m_settings != NULL) {
         ui->sbMaxNoOfRawDataLines->setValue(m_settings->maxNoOfLines().toInt());
         ui->sbResponseTimeout->setValue(m_settings->timeOut().toInt());
+        ui->sbBaseAddr->setValue(m_settings->baseAddr().toInt());
     }
 
 }
@@ -36,6 +37,7 @@ void Settings::changesAccepted()
     if (m_settings != NULL) {
         m_settings->setMaxNoOfLines(ui->sbMaxNoOfRawDataLines->cleanText());
         m_settings->setTimeOut(ui->sbResponseTimeout->cleanText());
+        m_settings->setBaseAddr(ui->sbBaseAddr->cleanText());
     }
 
 }

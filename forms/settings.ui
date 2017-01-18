@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>220</width>
-    <height>100</height>
+    <height>134</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,12 +32,60 @@
    <string>Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../data/qModMaster.qrc">
-    <normaloff>:/img/options-16.png</normaloff>:/img/options-16.png</iconset>
+   <iconset resource="../icons/icons.qrc">
+    <normaloff>:/icons/options-16.png</normaloff>:/icons/options-16.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="2">
+      <widget class="QSpinBox" name="sbResponseTimeout">
+       <property name="minimum">
+        <number>0</number>
+       </property>
+       <property name="maximum">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="lblTimeout">
+       <property name="text">
+        <string>Response Timeout (sec)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="lblMaxNoOfRawDataLines">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>132</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Max No Of Bus Monitor Lines</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="2">
       <widget class="QSpinBox" name="sbMaxNoOfRawDataLines">
        <property name="sizePolicy">
@@ -72,51 +120,20 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="lblMaxNoOfRawDataLines">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>132</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Max No Of Bus Monitor Lines</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="lblTimeout">
-       <property name="text">
-        <string>Response Timeout (sec)</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QSpinBox" name="sbResponseTimeout">
-       <property name="minimum">
-        <number>0</number>
-       </property>
+     <item row="2" column="2">
+      <widget class="QSpinBox" name="sbBaseAddr">
        <property name="maximum">
-        <number>20</number>
+        <number>1</number>
+       </property>
+       <property name="value">
+        <number>1</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="lblBaseAddr">
+       <property name="text">
+        <string>Base Addr</string>
        </property>
       </widget>
      </item>
@@ -135,7 +152,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../data/qModMaster.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections>
   <connection>

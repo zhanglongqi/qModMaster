@@ -30,6 +30,8 @@ public:
     //Var
     QString  maxNoOfLines();
     void setMaxNoOfLines(QString maxNoOfLines);
+    QString  baseAddr();
+    void setBaseAddr(QString baseAddr);
     QString  timeOut();
     void setTimeOut(QString timeOut);
     void loadSettings();
@@ -48,6 +50,7 @@ private:
     QString m_RTS;
     //Var
     QString m_maxNoOfLines;
+    QString m_baseAddr;
     QString m_timeOut;
 
 signals:

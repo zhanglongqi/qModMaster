@@ -1,9 +1,9 @@
 #ifndef SETTINGSMODBUSTCP_H
 #define SETTINGSMODBUSTCP_H
 
-#include <QtWidgets/QDialog>
+#include <QDialog>
 #include <QSettings>
-#include <QtWidgets/QAbstractButton>
+#include <QAbstractButton>
 
 #include "src/modbuscommsettings.h"
 

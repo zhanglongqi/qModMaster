@@ -26,11 +26,14 @@
    <string>Modbus Master</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../data/qModMaster.qrc">
-    <normaloff>:/img/connect-16.png</normaloff>:/img/connect-16.png</iconset>
+   <iconset resource="../icons/icons.qrc">
+    <normaloff>:/icons/connect-24.png</normaloff>:/icons/connect-24.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="MyInfoBar" name="infobar"/>
+    </item>
     <item>
      <widget class="QFrame" name="frame_1">
       <property name="minimumSize">
@@ -75,20 +78,20 @@
          <widget class="QComboBox" name="cmbModbusMode">
           <item>
            <property name="text">
-            <string>RTU</string>
+            <string notr="true">RTU</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>TCP</string>
+            <string notr="true">TCP</string>
            </property>
           </item>
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QLabel" name="lblSlaveID">
+         <widget class="QLabel" name="lblSlave">
           <property name="text">
-           <string>Slave ID</string>
+           <string>Slave Addr</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -264,64 +267,6 @@
          </widget>
         </item>
         <item row="2" column="5">
-         <widget class="QPushButton" name="btAddItems">
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>Add Items</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../data/qModMaster.qrc">
-            <normaloff>:/img/add-16.png</normaloff>:/img/add-16.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="5">
-         <widget class="QPushButton" name="btClear">
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>24</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Clear Items</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../data/qModMaster.qrc">
-            <normaloff>:/img/remove-16.png</normaloff>:/img/remove-16.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="6">
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -361,7 +306,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>500</width>
+     <width>560</width>
      <height>21</height>
     </rect>
    </property>
@@ -384,12 +329,14 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionModbus_Manual"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
      <string>View</string>
     </property>
+    <addaction name="actionOpenLogFile"/>
     <addaction name="actionBus_Monitor"/>
    </widget>
    <widget class="QMenu" name="menuCommands">
@@ -399,12 +346,22 @@
     <addaction name="actionConnect"/>
     <addaction name="actionRead_Write"/>
     <addaction name="actionScan"/>
+    <addaction name="actionClear"/>
     <addaction name="actionReset_Counters"/>
+   </widget>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string notr="true">Language</string>
+    </property>
+    <addaction name="actionSimplified_Chinese_zh_CN"/>
+    <addaction name="actionTraditional_Chinese_zh_TW"/>
+    <addaction name="actionEnglish_en_US"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOptions"/>
    <addaction name="menuCommands"/>
    <addaction name="menuView"/>
+   <addaction name="menuLanguage"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -422,8 +379,8 @@
   </widget>
   <action name="actionExit">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/close16.png</normaloff>:/img/close16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/exit-16.png</normaloff>:/icons/exit-16.png</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -434,11 +391,11 @@
   </action>
   <action name="actionSerial_RTU">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/edit-16.png</normaloff>:/img/edit-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/serial-pot-16.png</normaloff>:/icons/serial-pot-16.png</iconset>
    </property>
    <property name="text">
-    <string>Modbus RTU...</string>
+    <string notr="true">Modbus RTU...</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -446,11 +403,11 @@
   </action>
   <action name="actionTCP">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/network-16.png</normaloff>:/img/network-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/ethernet-port-16.png</normaloff>:/icons/ethernet-port-16.png</iconset>
    </property>
    <property name="text">
-    <string>Modbus TCP...</string>
+    <string notr="true">Modbus TCP...</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -458,8 +415,8 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/info16.png</normaloff>:/img/info16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/info-sign-16.png</normaloff>:/icons/info-sign-16.png</iconset>
    </property>
    <property name="text">
     <string>About...</string>
@@ -470,8 +427,8 @@
   </action>
   <action name="actionBus_Monitor">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/view-16.png</normaloff>:/img/view-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/TV-16.png</normaloff>:/icons/TV-16.png</iconset>
    </property>
    <property name="text">
     <string>Bus Monitor</string>
@@ -482,8 +439,8 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/options-16.png</normaloff>:/img/options-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/options-16.png</normaloff>:/icons/options-16.png</iconset>
    </property>
    <property name="text">
     <string>Settings...</string>
@@ -494,8 +451,8 @@
   </action>
   <action name="actionRead_Write">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/refresh-16.png</normaloff>:/img/refresh-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/data-sort-16.png</normaloff>:/icons/data-sort-16.png</iconset>
    </property>
    <property name="text">
     <string>Read / Write</string>
@@ -506,8 +463,9 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/connect-16.png</normaloff>:/img/connect-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/plug-disconnect-16.png</normaloff>
+     <normalon>:/icons/plug-connect-16.png</normalon>:/icons/plug-disconnect-16.png</iconset>
    </property>
    <property name="text">
     <string>Connect</string>
@@ -518,9 +476,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/run-16.png</normaloff>
-     <normalon>:/img/pause-16.png</normalon>:/img/run-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/cyclic-process-16.png</normaloff>:/icons/cyclic-process-16.png</iconset>
    </property>
    <property name="text">
     <string>Scan</string>
@@ -528,20 +485,100 @@
   </action>
   <action name="actionReset_Counters">
    <property name="icon">
-    <iconset resource="../data/qModMaster.qrc">
-     <normaloff>:/img/Trash-16.png</normaloff>:/img/Trash-16.png</iconset>
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/reset-16.png</normaloff>:/icons/reset-16.png</iconset>
    </property>
    <property name="text">
     <string>Reset Counters</string>
    </property>
   </action>
+  <action name="actionSimplified_Chinese_zh_CN">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/China-flag-16.png</normaloff>:/icons/China-flag-16.png</iconset>
+   </property>
+   <property name="text">
+    <string notr="true">简体中文 (zh_CN)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">简体中文 (zh_CN)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">简体中文 (zh_CN)</string>
+   </property>
+  </action>
+  <action name="actionTraditional_Chinese_zh_TW">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/Taiwan-flag-16.png</normaloff>:/icons/Taiwan-flag-16.png</iconset>
+   </property>
+   <property name="text">
+    <string notr="true">繁體中文 (zh_TW)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">繁體中文 (zh_TW)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">繁體中文 (zh_TW)</string>
+   </property>
+  </action>
+  <action name="actionEnglish_en_US">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/usa-flag-16.png</normaloff>:/icons/usa-flag-16.png</iconset>
+   </property>
+   <property name="text">
+    <string notr="true">English (en_US)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">English (en_US)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">English (en_US)</string>
+   </property>
+  </action>
+  <action name="actionOpenLogFile">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/text-x-log-16.png</normaloff>:/icons/text-x-log-16.png</iconset>
+   </property>
+   <property name="text">
+    <string>Log File</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/edit-clear-16.png</normaloff>:/icons/edit-clear-16.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear Table</string>
+   </property>
+  </action>
+  <action name="actionModbus_Manual">
+   <property name="icon">
+    <iconset resource="../icons/icons.qrc">
+     <normaloff>:/icons/help-desk-icon-16.png</normaloff>:/icons/help-desk-icon-16.png</iconset>
+   </property>
+   <property name="text">
+    <string>Modbus Manual</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyInfoBar</class>
+   <extends>QFrame</extends>
+   <header>src/MyInfoBar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tblRegisters</tabstop>
  </tabstops>
  <resources>
-  <include location="../data/qModMaster.qrc"/>
+  <include location="../icons/icons.qrc"/>
  </resources>
  <connections>
   <connection>

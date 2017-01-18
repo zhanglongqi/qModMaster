@@ -26,8 +26,8 @@
    <string>About</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../data/qModMaster.qrc">
-    <normaloff>:/img/info16.png</normaloff>:/img/info16.png</iconset>
+   <iconset>
+    <normaloff>:/icons/info16.png</normaloff>:/icons/info16.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -43,7 +43,7 @@
       </font>
      </property>
      <property name="text">
-      <string>QModMaster</string>
+      <string notr="true">QModMaster</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -51,7 +51,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="lbnURL">
+    <widget class="QLabel" name="lblLibVersion">
      <property name="font">
       <font>
        <weight>75</weight>
@@ -59,7 +59,23 @@
       </font>
      </property>
      <property name="text">
-      <string>http://</string>
+      <string>lib version</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblURL">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string notr="true">http://</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -71,8 +87,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../data/qModMaster.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

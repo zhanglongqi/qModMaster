@@ -1,8 +1,8 @@
 #ifndef BUSMONITOR_H
 #define BUSMONITOR_H
 
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QLabel>
+#include <QMainWindow>
+#include <QLabel>
 #include "src/rawdatamodel.h"
 
 namespace Ui {
@@ -21,19 +21,19 @@ private:
     Ui::BusMonitor *ui;
     RawDataModel *m_rawDataModel;
     void parseTxMsg(QString msg);
-    void parseTxPDU(QStringList pdu);
+    void parseTxPDU(QStringList pdu, QString slave);
     void parseRxMsg(QString msg);
-    void parseRxPDU(QStringList pdu);
+    void parseRxPDU(QStringList pdu, QString slave);
     void parseSysMsg(QString msg);
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void showEvent(QShowEvent *event);
 
 private slots:
     void clear();
     void exit();
     void save();
-    void startStop(bool en);
     void selectedRow(const QModelIndex & selected);
 
 };

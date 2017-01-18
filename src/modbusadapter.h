@@ -50,7 +50,6 @@ private:
      int m_numOfRegs;
      int m_scanRate;
      QTimer *m_pollTimer;
-     QTimer *m_timeOutTimer;
      int m_packets;
      int m_errors;
      int m_timeOut;
@@ -62,7 +61,6 @@ signals:
 public slots:
     void modbusTransaction();
     void resetCounters();
-    void timeOut();
 
 };
 
